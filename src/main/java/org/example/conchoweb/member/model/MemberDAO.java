@@ -1,4 +1,4 @@
-package org.example.member.model;
+package org.example.conchoweb.member.model;
 import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 

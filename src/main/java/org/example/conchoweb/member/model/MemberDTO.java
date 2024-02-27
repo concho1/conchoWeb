@@ -1,4 +1,4 @@
-package org.example.member.model;
+package org.example.conchoweb.member.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

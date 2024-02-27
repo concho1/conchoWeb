@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="imagetoolbar" content="no">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="format-detection" content="telephone=no">
   <meta name="title" content="웹사이트">
@@ -15,45 +14,46 @@
   <meta property="og:image" content="https://웹사이트/images/opengraph.png">
   <meta property="og:url" content="https://웹사이트">
   <title>pageHome | dd</title>
-  <link rel="stylesheet" href="../resources/css/setting.css">
-  <link rel="stylesheet" href="../resources/css/plugin.css">
-  <link rel="stylesheet" href="../resources/css/template.css">
-  <link rel="stylesheet" href="../resources/css/common.css">
-  <link rel="stylesheet" href="../resources/css/style.css">
+  <link rel="stylesheet" th:href="@{/css/setting.css}" />
+  <link rel="stylesheet" th:href="@{/css/plugin.css}" />
+  <link rel="stylesheet" th:href="@{/css/template.css}" />
+  <link rel="stylesheet" th:href="@{/css/common.css}" />
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
+
 
 <body>
   <!-- [S]thpart-kPLSyBsWWK -->
-  <header class="thpart-kPLSyBsWWK" data-bid="kPLSyBsWWK" id="">
+  <header class="thpart-kPLSyBsWWK" data-bid="kPLSyBsWWK" id="s">
     <div class="header-inner">
       <div class="header-container container-lg">
         <h1 class="header-title">
-          <a href="javascript:void(0)">Concho​<br></a>
+          <a href="javascript:void(0)">Concho<br></a>
         </h1>
         <div class="header-center">
           <div class="header-title header-mobile-top">
             <a href="javascript:void(0)">
-              <img src="../resources/images/img_logo_black.png" alt="로고">
+              <img src="/images/img_logo_black.png" alt="로고">
             </a>
           </div>
           <ul class="header-gnblist">
             <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
+              <a class="header-gnblink" th:href="@{/}">
                 <span>웹사이트 소개</span>
               </a>
             </li>
             <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
+              <a class="header-gnblink" th:href="@{/openPage/pageCommunityTm}">
                 <span>스토리 게시판</span>
               </a>
             </li>
             <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
+              <a class="header-gnblink" th:href="@{/openPage/pageLogIn}">
                 <span>로그인</span>
               </a>
             </li>
             <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
+              <a class="header-gnblink" th:href="@{/openPage/pageSignUp}">
                 <span>회원가입</span>
               </a>
             </li>
@@ -72,13 +72,13 @@
           </div>
           <div class="header-utils">
             <button class="btn-allmenu">
-              <img src="../resources/icons/ico_menu_black.svg" alt="PC메뉴 아이콘">
+              <img src="/icons/ico_menu_black.svg" alt="PC메뉴 아이콘">
             </button>
             <button class="btn-momenu">
-              <img src="../resources/icons/ico_menu_black.svg" alt="모바일메뉴 아이콘">
+              <img src="/icons/ico_menu_black.svg" alt="모바일메뉴 아이콘">
             </button>
             <button class="btn-close">
-              <img src="../resources/icons/ico_close_black.svg" alt="닫기 아이콘">
+              <img src="/icons/ico_close_black.svg" alt="닫기 아이콘">
             </button>
           </div>
         </div>
@@ -103,8 +103,8 @@
       <div class="contents-inner">
         <div class="contents-container container-md">
           <div class="imageset">
-            <img class="imageset-img img-pc" src="../medias/7502cd1a0ca14cb3a53f87346e417dfc.png" alt="">
-            <img class="imageset-img img-mobile" src="../resources/images/img_basic_mobile_N21_1.png" alt="모바일 이미지">
+            <img class="imageset-img img-pc" src="/medias/7502cd1a0ca14cb3a53f87346e417dfc.png" alt="">
+            <img class="imageset-img img-mobile" src="/images/img_basic_mobile_N21_1.png" alt="모바일 이미지">
           </div>
           <div class="contents-group">
             <div class="cardset">
@@ -171,22 +171,22 @@
         <ul class="footer-snslist">
           <li class="footer-snsitem">
             <a class="footer-snslink" href="javascript:void(0)">
-              <img src="../resources/icons/ico_instagram_lightgrey.svg" alt="인스타그램">
+              <img src="/icons/ico_instagram_lightgrey.svg" alt="인스타그램">
             </a>
           </li>
           <li class="footer-snsitem">
             <a class="footer-snslink" href="javascript:void(0)">
-              <img src="../resources/icons/ico_youtube_lightgrey.svg" alt="유튜브">
+              <img src="/icons/ico_youtube_lightgrey.svg" alt="유튜브">
             </a>
           </li>
           <li class="footer-snsitem">
             <a class="footer-snslink" href="javascript:void(0)">
-              <img src="../resources/icons/ico_facebook_lightgrey.svg" alt="페이스북">
+              <img src="/icons/ico_facebook_lightgrey.svg" alt="페이스북">
             </a>
           </li>
           <li class="footer-snsitem">
             <a class="footer-snslink" href="javascript:void(0)">
-              <img src="../resources/icons/ico_kakao_lightgrey.svg" alt="카카오톡">
+              <img src="/icons/ico_kakao_lightgrey.svg" alt="카카오톡">
             </a>
           </li>
         </ul>
@@ -206,9 +206,9 @@
     </div>
   </footer>
   <!-- [E]thpart-GRlSYbSXNM -->
-  <script src="../resources/js/setting.js"></script>
-  <script src="../resources/js/plugin.js"></script>
-  <script src="../resources/js/template.js"></script>
-  <script src="../resources/js/common.js"></script>
-  <script src="../resources/js/script.js"></script>
+  <script src="/js/setting.js"></script>
+  <script src="/js/plugin.js"></script>
+  <script src="/js/template.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/js/script.js"></script>
 </body>
