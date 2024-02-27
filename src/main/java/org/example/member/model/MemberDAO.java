@@ -1,5 +1,4 @@
 package org.example.member.model;
-import org.example.member.repository.MemberDTO;
 import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 

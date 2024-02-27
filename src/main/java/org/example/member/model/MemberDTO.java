@@ -1,4 +1,4 @@
-package org.example.member.repository;
+package org.example.member.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +17,7 @@ public class MemberDTO {
     private String name;
     @Column(name="member_age")
     private String age;
-    @Column(name="member_age")
+    @Column(name="member_gender")
     private String gender;
     public MemberDTO() {}
     public MemberDTO(String email, String pw, String name, String age, String gender) {
