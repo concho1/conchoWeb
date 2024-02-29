@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -15,16 +15,16 @@
   <meta property="og:image" content="https://웹사이트/images/opengraph.png">
   <meta property="og:url" content="https://웹사이트">
   <title>pageMemberHome | dd</title>
-  <link rel="stylesheet" href="../resources/css/setting.css">
-  <link rel="stylesheet" href="../resources/css/plugin.css">
-  <link rel="stylesheet" href="../resources/css/template.css">
-  <link rel="stylesheet" href="../resources/css/common.css">
-  <link rel="stylesheet" href="../resources/css/style.css">
+  <link rel="stylesheet" th:href="@{/css/setting.css}" />
+  <link rel="stylesheet" th:href="@{/css/plugin.css}" />
+  <link rel="stylesheet" th:href="@{/css/template.css}" />
+  <link rel="stylesheet" th:href="@{/css/common.css}" />
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 
 <body>
   <!-- [S]thpart-gWLT3s2y66 -->
-  <header class="thpart-gWLT3s2y66" data-bid="gWLT3s2y66" id="">
+  <header class="thpart-gWLT3s2y66" data-bid="gWLT3s2y66" id="sd">
     <div class="header-inner">
       <div class="header-container container-lg">
         <div class="header-left">
@@ -32,10 +32,6 @@
             <a href="javascript:void(0)">Concho</a>
           </h1>
           <div class="header-mobile-group">
-            <div class="header-mobile-top">
-              <p>로그인이 필요합니다.</p>
-              <a href="javascript:void(0)">로그인</a>
-            </div>
             <ul class="header-gnblist">
               <li class="header-gnbitem">
                 <a class="header-gnblink" href="javascript:void(0)">
@@ -54,26 +50,26 @@
               </li>
             </ul>
             <button class="header-btn btn-close">
-              <img src="../resources/icons/ico_close_white.svg" alt="닫기 아이콘">
+              <img src="/icons/ico_close_white.svg" alt="닫기 아이콘">
             </button>
           </div>
         </div>
         <div class="header-right">
           <div class="header-utils">
             <button class="header-btn btn-seach">
-              <img src="../resources/icons/ico_seach_black.svg" alt="검색 아이콘">
+              <img src="/icons/ico_seach_black.svg" alt="검색 아이콘">
             </button>
             <a href="javascipt:void(0);" class="header-btn btn-user">
-              <img src="../resources/icons/ico_user_black.svg" alt="유저 아이콘">
+              <img src="/icons/ico_user_black.svg" alt="유저 아이콘">
             </a>
             <button class="header-btn btn-allmenu">
-              <img src="../resources/icons/ico_menu2_black.svg" alt="PC메뉴 아이콘">
+              <img src="/icons/ico_menu2_black.svg" alt="PC메뉴 아이콘">
             </button>
             <button class="header-btn btn-momenu">
-              <img src="../resources/icons/ico_menu2_black.svg" alt="모바일메뉴 아이콘">
+              <img src="/icons/ico_menu2_black.svg" alt="모바일메뉴 아이콘">
             </button>
             <button class="header-btn btn-close">
-              <img src="../resources/icons/ico_close_black.svg" alt="닫기 아이콘">
+              <img src="/icons/ico_close_black.svg" alt="닫기 아이콘">
             </button>
           </div>
         </div>
@@ -88,8 +84,8 @@
       <div class="contents-inner">
         <div class="contents-container container-md">
           <div class="imageset">
-            <img class="imageset-img img-pc" src="../medias/7502cd1a0ca14cb3a53f87346e417dfc.png" alt="">
-            <img class="imageset-img img-mobile" src="../resources/images/img_basic_mobile_N21_1.png" alt="모바일 이미지">
+            <img class="imageset-img img-pc" src="/medias/7502cd1a0ca14cb3a53f87346e417dfc.png" alt="pc 이미지">
+            <img class="imageset-img img-mobile" src="/medias/7502cd1a0ca14cb3a53f87346e417dfc.png" alt="모바일 이미지">
           </div>
           <div class="contents-group">
             <div class="cardset">
@@ -156,22 +152,22 @@
         <ul class="footer-snslist">
           <li class="footer-snsitem">
             <a class="footer-snslink" href="javascript:void(0)">
-              <img src="../resources/icons/ico_instagram_lightgrey.svg" alt="인스타그램">
+              <img src="/icons/ico_instagram_lightgrey.svg" alt="인스타그램">
             </a>
           </li>
           <li class="footer-snsitem">
             <a class="footer-snslink" href="javascript:void(0)">
-              <img src="../resources/icons/ico_youtube_lightgrey.svg" alt="유튜브">
+              <img src="/icons/ico_youtube_lightgrey.svg" alt="유튜브">
             </a>
           </li>
           <li class="footer-snsitem">
             <a class="footer-snslink" href="javascript:void(0)">
-              <img src="../resources/icons/ico_facebook_lightgrey.svg" alt="페이스북">
+              <img src="/icons/ico_facebook_lightgrey.svg" alt="페이스북">
             </a>
           </li>
           <li class="footer-snsitem">
             <a class="footer-snslink" href="javascript:void(0)">
-              <img src="../resources/icons/ico_kakao_lightgrey.svg" alt="카카오톡">
+              <img src="/icons/ico_kakao_lightgrey.svg" alt="카카오톡">
             </a>
           </li>
         </ul>
@@ -191,9 +187,9 @@
     </div>
   </footer>
   <!-- [E]thpart-GRlSYbSXNM -->
-  <script src="../resources/js/setting.js"></script>
-  <script src="../resources/js/plugin.js"></script>
-  <script src="../resources/js/template.js"></script>
-  <script src="../resources/js/common.js"></script>
-  <script src="../resources/js/script.js"></script>
+  <script src="/js/setting.js"></script>
+  <script src="/js/plugin.js"></script>
+  <script src="/js/template.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/js/script.js"></script>
 </body>

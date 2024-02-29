@@ -9,6 +9,9 @@ import java.util.Optional;
 public interface MemberDAO extends CrudRepository<MemberDTO,String>{
     // email과 pw로 사용자 검색
     Optional<MemberDTO> findUserByEmailAndPw(String email,String pw);
-    // email로 사용자 검색
-    Optional<MemberDTO> findUserByEmail(String email);
+    // 이메일로 사용자 존재 여부 확인
+    boolean existsByEmail(String email);
+
+
+
 }

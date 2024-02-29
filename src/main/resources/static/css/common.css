@@ -150,7 +150,7 @@
 .thpart-kPLSyBsWWK .header-right { display: flex; align-items: center; }
 .thpart-kPLSyBsWWK .header-lang { position: relative; font-size: var(--fs-p4); }
 .thpart-kPLSyBsWWK .header-langbtn { padding: 0 2rem 0 0.8rem; position: relative; border: none; background: none; font-weight: 500; }
-.thpart-kPLSyBsWWK .header-langbtn::after { content: ''; position: absolute; top: 0.4rem; right: 0; width: 1.6rem; height: 1.6rem; background: url("../../resources/icons/ico_downarrow_black.svg") no-repeat top right/cover; }
+.thpart-kPLSyBsWWK .header-langbtn::after { content: ''; position: absolute; top: 0.4rem; right: 0; width: 1.6rem; height: 1.6rem; background: url("../icons/ico_downarrow_black.svg") no-repeat top right/cover; }
 .thpart-kPLSyBsWWK .header-langlist { position: absolute; top: 3rem; left: 0; z-index: 200; border-radius: 0.6rem; background-color: var(--primary); }
 .thpart-kPLSyBsWWK .header-langitem { max-height: 0; transition: all 0.5s; overflow: hidden; }
 .thpart-kPLSyBsWWK .header-langitem+.header-langitem a { padding-top: 0; }

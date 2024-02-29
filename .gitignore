@@ -35,3 +35,13 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### token ###
+# credentials.json 파일 추적에서 제외
+src/main/resources/credentials.json
+
+# DriveQuickstart.java 파일 추적에서 제외
+src/main/java/org/example/conchoweb/DriveQuickstart.java
+
+# tokens 디렉토리 추적에서 제외
+tokens/

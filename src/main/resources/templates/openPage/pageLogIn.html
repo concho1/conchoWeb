@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -14,32 +14,32 @@
   <meta property="og:description" content="웹사이트입니다">
   <meta property="og:image" content="https://웹사이트/images/opengraph.png">
   <meta property="og:url" content="https://웹사이트">
-  <title>pageLogIn | dd</title>
-  <link rel="stylesheet" href="../resources/css/setting.css">
-  <link rel="stylesheet" href="../resources/css/plugin.css">
-  <link rel="stylesheet" href="../resources/css/template.css">
-  <link rel="stylesheet" href="../resources/css/common.css">
-  <link rel="stylesheet" href="../resources/css/style.css">
+  <title>pageLogIn</title>
+  <link rel="stylesheet" th:href="@{/css/setting.css}">
+  <link rel="stylesheet" th:href="@{/css/plugin.css}">
+  <link rel="stylesheet" th:href="@{/css/template.css}">
+  <link rel="stylesheet" th:href="@{/css/common.css}">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
   <!-- [S]thpart-kPLSyBsWWK -->
-  <header class="thpart-kPLSyBsWWK" data-bid="kPLSyBsWWK" id="">
+  <header class="thpart-kPLSyBsWWK" data-bid="kPLSyBsWWK" id="sd">
     <div class="header-inner">
       <div class="header-container container-lg">
         <h1 class="header-title">
-          <a href="javascript:void(0)">Concho​<br></a>
+          <a href="javascript:void(0)">Concho<br></a>
         </h1>
         <div class="header-center">
           <div class="header-title header-mobile-top">
             <a href="javascript:void(0)">
-              <img src="../resources/images/img_logo_black.png" alt="로고">
+              <img src="/images/img_logo_black.png" alt="로고">
             </a>
           </div>
           <ul class="header-gnblist">
             <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
-                <span contenteditable="true">홈으로 가기</span>
+              <a class="header-gnblink" th:href="@{/openPage/pageHome}">
+                <span>홈으로 가기</span>
               </a>
             </li>
             <li class="header-gnbitem">
@@ -47,7 +47,7 @@
             <li class="header-gnbitem">
             </li>
             <li class="header-gnbitem">
-              <a class="header-gnblink" href="javascript:void(0)">
+              <a class="header-gnblink" th:href="@{/openPage/pageSignUp}">
                 <span>회원가입</span>
               </a>
             </li>
@@ -66,13 +66,13 @@
           </div>
           <div class="header-utils">
             <button class="btn-allmenu">
-              <img src="../resources/icons/ico_menu_black.svg" alt="PC메뉴 아이콘">
+              <img src="/icons/ico_menu_black.svg" alt="PC메뉴 아이콘">
             </button>
             <button class="btn-momenu">
-              <img src="../resources/icons/ico_menu_black.svg" alt="모바일메뉴 아이콘">
+              <img src="/icons/ico_menu_black.svg" alt="모바일메뉴 아이콘">
             </button>
             <button class="btn-close">
-              <img src="../resources/icons/ico_close_black.svg" alt="닫기 아이콘">
+              <img src="/icons/ico_close_black.svg" alt="닫기 아이콘">
             </button>
           </div>
         </div>
@@ -83,25 +83,25 @@
   <!-- [E]thpart-kPLSyBsWWK -->
   <main class="th-layout-main ">
     <!-- [S]basic-N37 -->
-    <div class="basic-N37" data-bid="rTlt3xUE4w" id="">
+    <div class="basic-N37" data-bid="rTlt3xUE4w" id="asd">
       <div class="contents-inner">
         <div class="contents-container container-md">
           <div class="imageset">
             <img class="imageset-img" src="https://images.unsplash.com/photo-1708583625765-e02e3fb6621d?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w0OTE2MDd8MHwxfGFsbHw1NHx8fHx8fDJ8fDE3MDkwMTI1Njl8&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080" alt="">
           </div>
-          <div class="form-group form-line">
+          <form th:action="@{/api/signIn}" th:object="${memberDTO}" method="post" class="form-group form-line">
             <div class="inputset inputset-line inputset-lg inputset-label">
               <label>
-                <h6 class="inputset-tit">​<br>​아이디<span>*</span>
+                <h6 class="inputset-tit"><br>이메일(아이디)<span>*</span>
                 </h6>
-                <input type="text" class="inputset-input form-control" placeholder="이메일을 입력해주세요." aria-label="내용" required="">
+                <input type="text" th:field="*{email}" class="inputset-input form-control" placeholder="이메일을 입력해주세요." aria-label="내용" required="">
               </label>
             </div>
             <div class="inputset inputset-line inputset-lg inputset-label">
               <label>
                 <h6 class="inputset-tit">비밀번호<span>*</span>
                 </h6>
-                <input type="text" class="inputset-input form-control" placeholder="비밀번호를 입력해주세요.(5자이상 20자 미만)" aria-label="내용" required="">
+                <input type="text" th:field="*{pw}" class="inputset-input form-control" placeholder="비밀번호를 입력해주세요.(5자이상 20자 미만)" aria-label="내용" required="">
               </label>
             </div>
             <div class="inputset inputset-line inputset-lg inputset-label">
@@ -120,9 +120,9 @@
               </div>
             </div>
             <div class="form-btn">
-              <button class="btnset" type="button">로그인</button>
+              <button class="btnset" type="submit">로그인</button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -159,22 +159,22 @@
         <ul class="footer-snslist">
           <li class="footer-snsitem">
             <a class="footer-snslink" href="javascript:void(0)">
-              <img src="../resources/icons/ico_instagram_lightgrey.svg" alt="인스타그램">
+              <img src="/icons/ico_instagram_lightgrey.svg" alt="인스타그램">
             </a>
           </li>
           <li class="footer-snsitem">
             <a class="footer-snslink" href="javascript:void(0)">
-              <img src="../resources/icons/ico_youtube_lightgrey.svg" alt="유튜브">
+              <img src="/icons/ico_youtube_lightgrey.svg" alt="유튜브">
             </a>
           </li>
           <li class="footer-snsitem">
             <a class="footer-snslink" href="javascript:void(0)">
-              <img src="../resources/icons/ico_facebook_lightgrey.svg" alt="페이스북">
+              <img src="/icons/ico_facebook_lightgrey.svg" alt="페이스북">
             </a>
           </li>
           <li class="footer-snsitem">
             <a class="footer-snslink" href="javascript:void(0)">
-              <img src="../resources/icons/ico_kakao_lightgrey.svg" alt="카카오톡">
+              <img src="/icons/ico_kakao_lightgrey.svg" alt="카카오톡">
             </a>
           </li>
         </ul>
@@ -194,9 +194,9 @@
     </div>
   </footer>
   <!-- [E]thpart-GRlSYbSXNM -->
-  <script src="../resources/js/setting.js"></script>
-  <script src="../resources/js/plugin.js"></script>
-  <script src="../resources/js/template.js"></script>
-  <script src="../resources/js/common.js"></script>
-  <script src="../resources/js/script.js"></script>
+  <script src="/js/setting.js"></script>
+  <script src="/js/plugin.js"></script>
+  <script src="/js/template.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/js/script.js"></script>
 </body>
