@@ -16,7 +16,7 @@ public class SignInLogic {
     }
 
     public SignInResult trySignIn(String email, String pw){
-        Optional<MemberDTO> memberDTO = memberDAO.findUserByEmailAndPw(email, pw);
+        Optional<MemberDTO> memberDTO = memberDAO.findByEmailAndPw(email, pw);
         if(memberDTO.isPresent()){  //DB에 값이 있으면
                                     return SIGN_IN_SUCCESSFUL;
         }else{                      //없으면

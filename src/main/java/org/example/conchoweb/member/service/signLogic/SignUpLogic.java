@@ -1,8 +1,11 @@
 package org.example.conchoweb.member.service.signLogic;
 import org.example.conchoweb.member.model.MemberDAO;
 import org.example.conchoweb.member.model.MemberDTO;
+import org.example.conchoweb.member.service.imgLogic.FileUploadLogic;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import static org.example.conchoweb.member.service.signLogic.SignUpResult.*;
 @Service
@@ -15,7 +18,7 @@ public class SignUpLogic {
     }
 
 
-    public SignUpResult trySignUp(MemberDTO member){
+    public SignUpResult trySignUp(MemberDTO member) throws GeneralSecurityException, IOException {
         ArrayList<String> memberAllArr =  member.getAll();
 
         // null, 빈값 검사
@@ -27,6 +30,10 @@ public class SignUpLogic {
         if(member.getPw().length() < 5 || member.getPw().length() > 20){
                                             return PASSWORD_FORMAT_FALSE;
         }
+        FileUploadLogic fileLogic = new FileUploadLogic(memberDAO);
+        // member 의 폴더가 없다면 생성
+        String folderId = fileLogic.tryMakeFolder(member.getEmail());
+        member.setFolderId(folderId);
 
         // DB에 저장 시도
         try {

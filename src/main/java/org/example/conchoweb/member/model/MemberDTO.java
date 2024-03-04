@@ -23,6 +23,9 @@ public class MemberDTO {
     private String age;
     @Column(name="member_gender")
     private String gender;
+    @Column(name="member_folder_id")
+    private String folderId;
+
     public MemberDTO() {}
     public MemberDTO(String email, String pw,  String nickname, String name, String age, String gender) {
         this.email = email;

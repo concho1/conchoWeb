@@ -167,6 +167,26 @@
 @media (max-width: 1200px) {
  .thpart-kPLSyBsWWK .header-container { align-items: center; padding: 0 2.4rem; }
 }
+
+progress {
+ width: 100%; /* 너비를 100%로 설정하여 부모 요소의 전체 너비를 차지하도록 함 */
+ height: 20px; /* 높이를 20px로 설정 */
+ /* 추가적인 스타일링을 위한 속성 */
+ color: #4CAF50; /* Chrome, Safari, Opera의 경우 진행 막대의 색상을 지정 */
+}
+
+progress::-webkit-progress-bar {
+ background-color: #eee; /* Chrome, Safari, Opera의 기본 막대 색상 */
+}
+
+progress::-webkit-progress-value {
+ background-color: #4CAF50; /* Chrome, Safari, Opera의 진행 막대 색상 */
+}
+
+progress::-moz-progress-bar {
+ background-color: #4CAF50; /* Firefox의 진행 막대 색상 */
+}
+
 @media (max-width: 992px) {
  .thpart-kPLSyBsWWK .header-inner { height: 6rem; }
  .thpart-kPLSyBsWWK .header-inner::before { content: none; }

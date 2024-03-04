@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -15,16 +15,17 @@
   <meta property="og:image" content="https://웹사이트/images/opengraph.png">
   <meta property="og:url" content="https://웹사이트">
   <title>pageImgUpload | dd</title>
-  <link rel="stylesheet" href="/static/css/setting.css">
-  <link rel="stylesheet" href="/static/css/plugin.css">
-  <link rel="stylesheet" href="/static/css/template.css">
-  <link rel="stylesheet" href="/static/css/common.css">
-  <link rel="stylesheet" href="/static/css/style.css">
+
+  <link rel="stylesheet" th:href="@{/css/setting.css}" />
+  <link rel="stylesheet" th:href="@{/css/plugin.css}" />
+  <link rel="stylesheet" th:href="@{/css/template.css}" />
+  <link rel="stylesheet" th:href="@{/css/common.css}" />
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 
 <body>
   <!-- [S]thpart-gWLT3s2y66 -->
-  <header class="thpart-gWLT3s2y66" data-bid="gWLT3s2y66" id="">
+  <header class="thpart-gWLT3s2y66" data-bid="gWLT3s2y66" id="nkj">
     <div class="header-inner">
       <div class="header-container container-lg">
         <div class="header-left">
@@ -53,26 +54,26 @@
               </li>
             </ul>
             <button class="header-btn btn-close">
-              <img src="/static/icons/ico_close_white.svg" alt="닫기 아이콘">
+              <img src="/icons/ico_close_white.svg" alt="닫기 아이콘">
             </button>
           </div>
         </div>
         <div class="header-right">
           <div class="header-utils">
             <button class="header-btn btn-seach">
-              <img src="/static/icons/ico_seach_black.svg" alt="검색 아이콘">
+              <img src="/icons/ico_seach_black.svg" alt="검색 아이콘">
             </button>
             <a href="javascipt:void(0);" class="header-btn btn-user">
-              <img src="/static/icons/ico_user_black.svg" alt="유저 아이콘">
+              <img src="/icons/ico_user_black.svg" alt="유저 아이콘">
             </a>
             <button class="header-btn btn-allmenu">
-              <img src="/static/icons/ico_menu2_black.svg" alt="PC메뉴 아이콘">
+              <img src="/icons/ico_menu2_black.svg" alt="PC메뉴 아이콘">
             </button>
             <button class="header-btn btn-momenu">
-              <img src="/static/icons/ico_menu2_black.svg" alt="모바일메뉴 아이콘">
+              <img src="/icons/ico_menu2_black.svg" alt="모바일메뉴 아이콘">
             </button>
             <button class="header-btn btn-close">
-              <img src="/static/icons/ico_close_black.svg" alt="닫기 아이콘">
+              <img src="/icons/ico_close_black.svg" alt="닫기 아이콘">
             </button>
           </div>
         </div>
@@ -81,41 +82,36 @@
     <div class="header-dim"></div>
   </header>
   <!-- [E]thpart-gWLT3s2y66 -->
-  <main class="th-layout-main ">
-    <!-- [S]basic-N24 -->
-    <div class="basic-N24" data-bid="QClt3Uz4mc" id="">
+  <main class="th-layout-main">
+    <div class="basic-N24" data-bid="QClt3Uz4mc" id="bjk">
       <div class="contents-inner">
         <div class="contents-container container-md">
-          <div class="form-group">
+          <form th:action="@{/upload-img}" th:method="post" enctype="multipart/form-data" class="form-group">
             <div class="textset">
               <h2 class="textset-tit">이미지 업로드</h2>
             </div>
-            <div class="inputset inputset-lg inputset-label">
-              <label>
-                <h6 class="inputset-tit">파일 이름</h6>
-                <input type="text" class="inputset-input form-control" placeholder="성함을 입력해주세요." aria-label="내용" required="">
-              </label>
-            </div>
-            <div class="inputset inputset-lg inputset-label">
-            </div>
-            <div class="inputset inputset-lg inputset-label">
+
+            <!-- 파일 선택 부분 -->
+            <div class="inputset inputset-lg inputset-label" id="drop-area">
               <label>
                 <h6 class="inputset-tit">파일 추가</h6>
-                <textarea class="inputset-textarea textarea-keyup form-control" placeholder="문의 내용을 입력해주세요." required=""></textarea>
-                <div class="inputset-langth">
-                  <span class="inputset-count">0</span>
-                  <span class="inputset-total">/4000</span>
-                </div>
+                <input type="file" name="files" id="files" multiple accept="image/*" style="display:none;">
+                <label for="files" class="inputset-textarea textarea-keyup form-control">파일 선택</label>
               </label>
+
             </div>
+            <br><br>
+            <div id="uploadStatus"></div>
+            <progress id="uploadProgress" value="0" max="100"></progress>
+
+            <!-- 파일 제출 버튼 -->
             <div class="form-btn">
               <button class="btnset" type="button">제출하기</button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
-    <!-- [E]basic-N24 -->
   </main>
   <!-- [S]thpart-GRlSYbSXNM -->
   <footer class="thpart-GRlSYbSXNM" data-bid="GRlSYbSXNM" id="">
@@ -148,22 +144,22 @@
         <ul class="footer-snslist">
           <li class="footer-snsitem">
             <a class="footer-snslink" href="javascript:void(0)">
-              <img src="/static/icons/ico_instagram_lightgrey.svg" alt="인스타그램">
+              <img src="/icons/ico_instagram_lightgrey.svg" alt="인스타그램">
             </a>
           </li>
           <li class="footer-snsitem">
             <a class="footer-snslink" href="javascript:void(0)">
-              <img src="/static/icons/ico_youtube_lightgrey.svg" alt="유튜브">
+              <img src="/icons/ico_youtube_lightgrey.svg" alt="유튜브">
             </a>
           </li>
           <li class="footer-snsitem">
             <a class="footer-snslink" href="javascript:void(0)">
-              <img src="/static/icons/ico_facebook_lightgrey.svg" alt="페이스북">
+              <img src="/icons/ico_facebook_lightgrey.svg" alt="페이스북">
             </a>
           </li>
           <li class="footer-snsitem">
             <a class="footer-snslink" href="javascript:void(0)">
-              <img src="/static/icons/ico_kakao_lightgrey.svg" alt="카카오톡">
+              <img src="/icons/ico_kakao_lightgrey.svg" alt="카카오톡">
             </a>
           </li>
         </ul>
@@ -183,9 +179,85 @@
     </div>
   </footer>
   <!-- [E]thpart-GRlSYbSXNM -->
-  <script src="/static/js/setting.js"></script>
-  <script src="/static/js/plugin.js"></script>
-  <script src="/static/js/template.js"></script>
-  <script src="/static/js/common.js"></script>
-  <script src="/static/js/script.js"></script>
+  <script src="/js/setting.js"></script>
+  <script src="/js/plugin.js"></script>
+  <script src="/js/template.js"></script>
+  <script src="/js/common.js"></script>
+  <script src="/js/script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var uploadBtn = document.querySelector('.btnset'); // 제출하기 버튼 선택
+      var filesToUpload = []; // 업로드할 파일을 저장할 배열
+      var isUploading = false; // 업로드 진행 상태 플래그
+
+      document.getElementById('files').addEventListener('change', function(e) {
+        filesToUpload = e.target.files; // 파일 선택 시 배열에 파일 저장
+        updateFileLabel(filesToUpload); // 파일 라벨 업데이트 함수 호출
+      });
+
+      uploadBtn.addEventListener('click', function() {
+        if (isUploading || filesToUpload.length === 0) {
+          // 이미 업로드 중이거나 파일이 선택되지 않은 경우 아무 작업도 수행하지 않음
+          return;
+        }
+        isUploading = true; // 업로드 시작
+        uploadBtn.disabled = true; // 업로드 중에는 버튼을 비활성화
+        var uploadStatus = document.getElementById('uploadStatus');
+        var uploadProgress = document.getElementById('uploadProgress');
+        var totalFiles = filesToUpload.length;
+        var uploadedCount = 0;
+
+        Array.from(filesToUpload).forEach(file => {
+          var formData = new FormData();
+          formData.append('file', file); // 업로드할 파일 추가
+          // 'https://e77a-211-197-18-247.ngrok-free.app/upload-img',   test 용
+          // '/upload-img',
+          fetch('/upload-img', {
+            method: 'POST',
+            body: formData
+          }).then(response => {
+            if(response.ok) {
+              uploadedCount++;
+              uploadStatus.innerHTML = `업로드 완료: ${uploadedCount} / ${totalFiles} 파일`;
+              uploadProgress.value = (uploadedCount / totalFiles) * 100;
+              if (uploadedCount === totalFiles) {
+                // 모든 파일의 업로드가 완료되면
+
+                isUploading = false; // 업로드 상태 업데이트
+                uploadBtn.disabled = false; // 버튼을 다시 활성화
+                filesToUpload = []; // 업로드된 파일 목록 초기화
+                updateFileLabel(filesToUpload); // 파일 라벨 업데이트
+                alert('이미지 업로드가 완료되었습니다.');
+              }
+            } else {
+              throw new Error('서버로부터 응답을 받지 못했습니다.');
+            }
+          }).catch(error => {
+            console.error('업로드 중 오류 발생:', error);
+            alert('업로드 중 오류 발생');
+            isUploading = false;
+            uploadBtn.disabled = false;
+          });
+        });
+
+      });
+
+      function updateFileLabel(files) {
+        var fileLabel = document.querySelector('label[for="files"]');
+        if (files.length > 10) {
+          fileLabel.textContent = `${files.length}개의 파일 선택됨`;
+        } else if (files.length > 1) {
+          // 파일 이름을 배열로 추출한 후 join 메서드를 사용하여 쉼표와 공백으로 구분된 문자열을 생성
+          let fileNames = Array.from(files).map(file => file.name).join(", ");
+          fileLabel.textContent = fileNames;
+        } else if (files.length === 1) {
+          fileLabel.textContent = files[0].name;
+        } else {
+          fileLabel.textContent = "파일 선택";
+        }
+      }
+
+    });
+  </script>
+
 </body>
