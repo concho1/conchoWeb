@@ -3,6 +3,7 @@ package org.example.conchoweb.member.controller;
 import jakarta.servlet.http.HttpSession;
 import org.example.conchoweb.member.model.MemberDAO;
 import org.example.conchoweb.member.model.MemberDTO;
+import org.example.conchoweb.member.service.imgLogic.FileDownloadLogic;
 import org.example.conchoweb.member.service.imgLogic.FileUploadLogic;
 import org.example.conchoweb.member.service.signLogic.SignInLogic;
 import org.example.conchoweb.member.service.signLogic.SignInResult;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.example.conchoweb.member.model.MemberDTO;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,8 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
-import java.util.Collections;
-import java.util.Map;
+import java.util.*;
 
 /*
     classpath:/META-INF/resources/
@@ -136,29 +137,60 @@ public class WebController {
         session.invalidate(); // 세션 정보를 삭제하여 로그아웃 처리
         return "redirect:/openPage/pageHome"; // 로그아웃 후 리다이렉트할 페이지
     }
+
+    // 회원 전용 홈페이지
     @GetMapping("/memberPage/pageMemberHome")
-    public String getMemberHome(HttpSession session, Model model){  //모델은 thymeleaf 를 통해 html 로 전달
+    public String getMemberHome(HttpSession session, Model model) throws GeneralSecurityException, IOException {  //모델은 thymeleaf 를 통해 html 로 전달
         String memberEmail = String.valueOf(session.getAttribute("memberEmail")); // session 의 반환 타입은 Object 따라서 String 타입으로 변환
         System.out.println(memberEmail);
+
         if(memberEmail.equals("null") || memberEmail.isBlank()){
             return "redirect:/openPage/pageHome";
         }else{
+
+            Optional<MemberDTO> memberDTO = memberDAO.findUserByEmail(memberEmail);
+            if(memberDTO.isPresent()){
+                MemberDTO member = memberDTO.get();
+                model.addAttribute("nickname", member.getNickname());
+            }
+            model.addAttribute("email", memberEmail);
+
+            FileDownloadLogic fileDownloadLogic = new FileDownloadLogic(memberDAO);
+            List<String> urlList = fileDownloadLogic.getDriveFileLinks(memberEmail);
+            for(int i=1; i<=urlList.size(); i++){
+                System.out.println(urlList.get(i-1));
+                model.addAttribute("url"+ i, urlList.get(i-1));
+            }
+
             return "memberPage/pageMemberHome";
         }
     }
+
+    // 이미지 업로드 페이지
     @GetMapping("/memberPage/pageImgUpload")
     public String getUploadedFolder(HttpSession session, Model model) throws GeneralSecurityException, IOException {
         String memberEmail = String.valueOf(session.getAttribute("memberEmail"));
+
         if(memberEmail.equals("null") || memberEmail.isBlank()){
             return "redirect:/openPage/pageHome";
         }
+
+        Optional<MemberDTO> memberDTO = memberDAO.findUserByEmail(memberEmail);
+        if(memberDTO.isPresent()){
+            MemberDTO member = memberDTO.get();
+            model.addAttribute("nickname", member.getNickname());
+        }
+
         model.addAttribute("file", new Object());
+
+
+
 
         return "memberPage/pageImgUpload";
     }
 
 
-    // 이미지 업로드 로직
+    // 이미지 업로드 api
     @PostMapping("/upload-img")
     public String singleFileUpload(@RequestParam("file") MultipartFile multipartFile, RedirectAttributes redirectAttributes, HttpSession session) throws GeneralSecurityException, IOException {
         String memberEmail = String.valueOf(session.getAttribute("memberEmail"));
@@ -183,5 +215,7 @@ public class WebController {
 
         return "redirect:/memberPage/pageImgUpload"; // 업로드 후 상태 페이지로 리다이렉트
     }
+
+
 
 }

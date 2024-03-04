@@ -16,4 +16,5 @@ public interface MemberDAO extends CrudRepository<MemberDTO, String> {
 
     // 이메일로 사용자 정보 찾기
     Optional<MemberDTO> findUserByEmail(String email);
+
 }

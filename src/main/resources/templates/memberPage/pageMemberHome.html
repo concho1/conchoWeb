@@ -2,6 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="imagetoolbar" content="no">
@@ -29,7 +30,7 @@
       <div class="header-container container-lg">
         <div class="header-left">
           <h1 class="header-title">
-            <a href="javascript:void(0)">Concho</a>
+            <a th:href="@{/memberPage/pageMemberHome}" th:text="${nickname}">Concho</a>
           </h1>
           <div class="header-mobile-group">
             <ul class="header-gnblist">
@@ -84,13 +85,17 @@
       <div class="contents-inner">
         <div class="contents-container container-md">
           <div class="imageset">
-            <img class="imageset-img img-pc" src="/medias/7502cd1a0ca14cb3a53f87346e417dfc.png" alt="pc 이미지">
-            <img class="imageset-img img-mobile" src="/medias/7502cd1a0ca14cb3a53f87346e417dfc.png" alt="모바일 이미지">
+            <img class="imageset-img img-pc" th:src="${url1}" alt="pc 이미지">
+            <img class="imageset-img img-mobile" th:src="${url1}" alt="모바일 이미지">
           </div>
           <div class="contents-group">
             <div class="cardset">
               <figure class="cardset-figure">
-                <img class="cardset-img" src="https://images.unsplash.com/photo-1708923738047-7a4a98affb5a?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w0OTE2MDd8MHwxfGFsbHwxOXx8fHx8fDJ8fDE3MDkwMTIwMTF8&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080" alt="">
+                <img class="cardset-img" th:src="${url2}" alt="">
+                <!-- https://drive.google.com/file/d/1sdVftmtXyhIsmPA6l9Lnop13Ove4YCBv/view?usp=sharing
+                    https://drive.google.com/thumbnail?id=1bxNZZIn0uAmvEKA_nH0FKuP3VSl76yrY&sz=w640
+                -->
+
               </figure>
               <div class="cardset-body">
                 <h5 class="cardset-tit">한눈에 보는 나의 스토리</h5>
@@ -99,7 +104,7 @@
             </div>
             <div class="cardset">
               <figure class="cardset-figure">
-                <img class="cardset-img" src="https://images.unsplash.com/photo-1708920789029-fa319c7adb4f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w0OTE2MDd8MHwxfGFsbHwyNXx8fHx8fDJ8fDE3MDkwMTIwMTF8&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080" alt="">
+                <img class="cardset-img" th:src="${url3}" alt="">
               </figure>
               <div class="cardset-body">
                 <h5 class="cardset-tit">사진을 찍은 위치를 확인하세요!</h5>
@@ -108,7 +113,7 @@
             </div>
             <div class="cardset">
               <figure class="cardset-figure">
-                <img class="cardset-img" src="https://images.unsplash.com/photo-1708523404081-e98dce2a4a90?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w0OTE2MDd8MHwxfGFsbHwyOXx8fHx8fDJ8fDE3MDkwMTIwMTF8&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080" alt="">
+                <img class="cardset-img" th:src="${url4}" alt="">
               </figure>
               <div class="cardset-body">
                 <h5 class="cardset-tit">안가본 지역으로 여행을 떠나요!</h5>
