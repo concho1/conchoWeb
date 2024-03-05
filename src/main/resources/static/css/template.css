@@ -15,7 +15,8 @@
   --warning: #ffc107;
   --danger: #dc0000;
   --black: #000;
-  --white: #fff;
+  --white: #ffffff;
+  --mycolor: #a0b8ec;
   --primary-rgb: 17, 17, 17;
   --secondary-rgb: 51, 51, 51;
   --success-rgb: 25, 135, 84;
@@ -32,7 +33,7 @@
   --link-color: var(--text-color1);
   --link-hover-color: var(--text-color1);
   --code-color: #d63384;
-  --highlight-bg: #F7F7FB;
+  --highlight-bg: #ffffff;
   --letter-spacing: -0.025rem;
   --text-color1: #111111;
   --text-color2: #333333;
@@ -257,7 +258,7 @@ body.body-scroll { overflow: hidden; }
 .p4 { font-size: var(--fs-p4); font-weight: 400; line-height: var(--lh-p4); } 
 .p5 { font-size: var(--fs-p5); font-weight: 400; line-height: var(--lh-p5); } 
 /* Button */
-.btn { display: inline-block; color: var(--body-color); background-color: transparent; border: 1px solid transparent; font-size: var(--ff-p1); font-weight: 500; transition: .3s; -webkit-user-select: none; -moz-user-select: none; user-select: none; } 
+.btn { display: inline-block; color: var(--body-color); background-color: transparent; border: 1px solid transparent; font-size: var(--fs-p1); font-weight: 500; transition: .3s; -webkit-user-select: none; -moz-user-select: none; user-select: none; }
 /* Util */
 .d-flex { display: flex !important; } 
 .justify-content-start { justify-content: flex-start !important; } 
@@ -460,10 +461,11 @@ body.body-scroll { overflow: hidden; }
 .cardset .cardset-body .cardset-txt { display: inline-block; font-size: 1.4rem; color: var(--text-color4); } 
 .cardset .cardset-body .cardset-desc + .cardset-txt { margin-top: 2rem; } 
 .cardset .cardset-body + .cardset-figure { margin-top: 4rem; } 
-.cardset .cardset-figure { width: 100%; height: 24rem; margin-bottom: 0; border-radius: 2rem; overflow: hidden; } 
+.cardset .cardset-figure { width: 130%; height: 70rem; margin-bottom: 0; border-radius: 2rem; overflow: hidden; }
 .cardset .cardset-figure + .cardset-body { margin-top: 4rem; } 
-.cardset .cardset-img { width: 100%; height: 100%; object-fit: cover; } 
-.cardset .cardset-tit { font-size: var(--lh-p4); line-height: var(--lh-p4); font-weight: 500; margin-bottom: 0; font-weight: 600; } 
+.cardset .cardset-img { width: 100%; height: 100%;  }
+.cardset .cardset-tit { font-size: var(--lh-p4); line-height: var(--lh-p4);
+    margin-bottom: 0; font-weight: 600; }
 .cardset .cardset-desc { margin-bottom: 0; margin-top: 2rem; font-size: var(--fs-p3); line-height: var(--lh-p3); color: var(--text-color3); } 
 .cardset .cardset-txt { color: var(--text-color4); font-size: var(--fs-p2); margin-bottom: 0; } 
 .cardset.cardset-sm .cardset-figure + .cardset-body { margin-top: 1.4rem; } 
@@ -505,7 +507,7 @@ body.body-scroll { overflow: hidden; }
  }
 /* Card : Cardset Inner */
 .cardset.cardset-inner { border-radius: 2rem; overflow: hidden; } 
-.cardset.cardset-inner .cardset-figure { height: 47rem; } 
+.cardset.cardset-inner .cardset-figure { height: 47rem; }
 .cardset.cardset-inner .cardset-figure + .cardset-body { position: absolute; background-color: transparent; z-index: 10; bottom: 0; padding: 3.2rem; margin-top: 0; } 
 .cardset.cardset-inner .cardset-tit { font-size: var(--fs-p1); color: var(--text-color5); } 
 .cardset.cardset-inner .cardset-desc { color: var(--line-color1); } 
