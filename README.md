@@ -26,3 +26,4 @@ todo list
 1. 구글 드라이브 delete 구현하기
 2. 이미지 업로드시 gps정보 db 저장 구현하기
 3. Vworld api 사용법 알아보기
+https://sgis.kostat.go.kr/developer/html/newOpenApi/api/intro.html#2
