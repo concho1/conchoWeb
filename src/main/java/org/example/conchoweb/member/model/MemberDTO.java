@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 @Setter
 @Getter
-@Entity(name="member_db")
+@Entity
 @Table(name="member_table")
 public class MemberDTO {
     @Id

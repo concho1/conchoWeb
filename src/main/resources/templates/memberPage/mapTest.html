@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pagetestMap</title>
+    <link rel="stylesheet" th:href="@{/css/setting.css}" />
+    <link rel="stylesheet" th:href="@{/css/plugin.css}" />
+    <link rel="stylesheet" th:href="@{/css/template.css}" />
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <script type="text/javascript" src="https://sgisapi.kostat.go.kr/OpenAPI3/auth/javascriptAuth?consumer_key=512341f8200444879b23"></script>
+</head>
+<body>
+    <header class="thpart-gWLT3s2y66" data-bid="gWLT3s2y66" id="sd">
+        <div class="header-inner">
+            <div class="header-container container-lg">
+                <div class="header-left">
+                    <h1 class="header-title">
+                        <a th:href="@{/memberPage/pageMemberHome}" th:text="${nickname}">Concho</a>
+                    </h1>
+                    <div class="header-mobile-group">
+                        <ul class="header-gnblist">
+                            <li class="header-gnbitem">
+                                <a class="header-gnblink" th:href="@{/memberPage/pageImgUpload}">
+                                    <span>사진 업로드하기</span>
+                                </a>
+                            </li>
+                            <li class="header-gnbitem">
+                                <a class="header-gnblink" th:href="@{/memberPage/mapTest}">
+                                    <span>지도위의 스토리 보기</span>
+                                </a>
+                            </li>
+                            <li class="header-gnbitem">
+                                <a class="header-gnblink" th:href="@{/memberPage/pageCommunity}">
+                                    <span>스토리 게시판</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <button class="header-btn btn-close">
+                            <img src="/icons/ico_close_white.svg" alt="닫기 아이콘">
+                        </button>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-utils">
+                        <button class="header-btn btn-seach">
+                            <img src="/icons/ico_seach_black.svg" alt="검색 아이콘">
+                        </button>
+                        <a href="javascipt:void(0);" class="header-btn btn-user">
+                            <img src="/icons/ico_user_black.svg" alt="유저 아이콘">
+                        </a>
+                        <button class="header-btn btn-allmenu">
+                            <img src="/icons/ico_menu2_black.svg" alt="PC메뉴 아이콘">
+                        </button>
+                        <button class="header-btn btn-momenu">
+                            <img src="/icons/ico_menu2_black.svg" alt="모바일메뉴 아이콘">
+                        </button>
+                        <button class="header-btn btn-close">
+                            <img src="/icons/ico_close_black.svg" alt="닫기 아이콘">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-dim"></div>
+    </header>
+    <div id="map" class="map"></div>
+<!-- map.setView(sop.utmk(953820, 1953437), 3); -->
+</body>
+<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+    var locationsJson = /*[[${jsonLocations}]]*/ 'default';
+    var locations = JSON.parse(locationsJson);
+    /*]]>*/
+    window.onload = function() {
+        var map = sop.map("map");
+        map.setView(sop.utmk(1010020, 1943437), 3);
+
+        var markerList = sop.markerClusterGroup({
+            animateAddingMarkers: true
+        });
+
+        map.addLayer(markerList);
+
+        // locations 배열을 사용하여 마커 생성
+        locations.forEach(function(location) {
+            var latLng = new sop.LatLng(location[0], location[1]);
+            console.log(`좌표 : ${latLng}`);
+            // 마커 생성 및 마커 클러스터 그룹에 추가
+            var marker = sop.marker(latLng);
+            markerList.addLayer(marker);
+        });
+    };
+</script>
+</html>

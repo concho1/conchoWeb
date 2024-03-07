@@ -1,5 +1,9 @@
 package org.example.conchoweb.member.service.imgLogic;
 
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.ExifSubIFDDirectory;
+import com.drew.metadata.exif.GpsDirectory;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.ByteArrayContent;
@@ -11,6 +15,8 @@ import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
 import org.example.conchoweb.member.model.MemberDAO;
 import org.example.conchoweb.member.model.MemberDTO;
+import org.example.conchoweb.member.model.MemberImgDAO;
+import org.example.conchoweb.member.model.MemberImgDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -22,11 +28,13 @@ import java.util.Optional;
 
 public class FileUploadLogic {
     private final MemberDAO memberDAO;
+    private final MemberImgDAO memberImgDAO;
     private static final String APPLICATION_NAME = "Google Drive API Java Quickstart";
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
 
-    public FileUploadLogic(MemberDAO memberDAO) {
+    public FileUploadLogic(MemberDAO memberDAO, MemberImgDAO memberImgDAO) {
         this.memberDAO = memberDAO;
+        this.memberImgDAO = memberImgDAO;
     }
 
     // 싱글톤 패턴 메서드 이용
@@ -106,12 +114,45 @@ public class FileUploadLogic {
                     .setFields("id, name")
                     .execute();
 
+            // 이미지 파일에서 메타데이터 추출
+            Metadata metadata = ImageMetadataReader.readMetadata(multipartFile.getInputStream());
+
+            // GPS 정보가 있는지 확인
+            if(metadata.containsDirectoryOfType(GpsDirectory.class) && metadata.containsDirectoryOfType(ExifSubIFDDirectory.class)) {
+                GpsDirectory gpsDirectory = metadata.getFirstDirectoryOfType(GpsDirectory.class);
+                ExifSubIFDDirectory directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
+                // GPS 정보가 있다면 위도와 경도 추출
+                if((gpsDirectory != null) && (directory != null)) {
+                    // 위도
+                    double latitude = gpsDirectory.getGeoLocation().getLatitude();
+                    // 경도
+                    double longitude = gpsDirectory.getGeoLocation().getLongitude();
+                    java.util.Date date = directory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL);
+
+                    if (date != null) {
+                        // 날짜 정보 출력
+                        System.out.println("Original Date and Time: " + date.toString());
+                        // GPS 정보 출력
+                        System.out.printf("Image GPS Information: Latitude: %s, Longitude: %s\n", latitude, longitude);
+                        // 회원의 이미지 저장할 객체 하나 만들고
+                        MemberImgDTO memberImgDTO = new MemberImgDTO(
+                                memberEmail, String.valueOf(latitude), String.valueOf(longitude), date.toString()
+                        );
+                        //DB에 저장
+                        memberImgDAO.save(memberImgDTO);
+                    } else {
+                        System.out.println("Original Date_time or GPS Information: Not found");
+                    }
+                }
+            }
             // 업로드 성공 메시지와 파일 정보를 출력합니다.
             System.out.printf("File ID: %s Name: %s uploaded %s successfully\n", file.getId(), file.getName(), multipartFile.getName());
+
+
             return true;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
             return false;
         }
     }

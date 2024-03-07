@@ -18,3 +18,18 @@
 @media (max-width: 992px) {
  .basic-N6 .contents-container { padding: 5rem 1.6rem; }
 }
+/* 기본 지도 스타일 */
+.map {
+ width: 98vw;
+ height: 85vh;
+ margin: 1rem 1rem 1rem 1vw;
+ border: 2px solid #0dcaf0;
+ border-radius: 20px;
+}
+
+/* 모바일 화면 대응 미디어 쿼리 */
+@media (max-width: 768px) { /* 768px는 일반적인 모바일 기기의 분기점입니다. 필요에 따라 조정하세요. */
+ .map {
+  height: 83vh;
+ }
+}

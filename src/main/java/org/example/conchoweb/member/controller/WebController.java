@@ -1,8 +1,8 @@
 package org.example.conchoweb.member.controller;
 
+import com.google.gson.Gson;
 import jakarta.servlet.http.HttpSession;
-import org.example.conchoweb.member.model.MemberDAO;
-import org.example.conchoweb.member.model.MemberDTO;
+import org.example.conchoweb.member.model.*;
 import org.example.conchoweb.member.service.imgLogic.FileDownloadLogic;
 import org.example.conchoweb.member.service.imgLogic.FileUploadLogic;
 import org.example.conchoweb.member.service.signLogic.SignInLogic;
@@ -43,8 +43,10 @@ import java.util.*;
 public class WebController {
 
     private final MemberDAO memberDAO;
-    public WebController(MemberDAO memberDAO) { // 생성자를 통한 MemberDAO 주입
+    private final MemberImgDAO memberImgDAO;
+    public WebController(MemberDAO memberDAO, MemberImgDAO memberImgDAO) { // 생성자를 통한 MemberDAO 주입
         this.memberDAO = memberDAO;
+        this.memberImgDAO = memberImgDAO;
     }
     @GetMapping("/index")
     public String getIndex(){
@@ -94,7 +96,7 @@ public class WebController {
     @PostMapping("/api/signup")
     public String signUp(@ModelAttribute MemberDTO member) throws GeneralSecurityException, IOException {
 
-        SignUpLogic signUpLogic = new SignUpLogic(memberDAO);
+        SignUpLogic signUpLogic = new SignUpLogic(memberDAO, memberImgDAO);
         // 회원가입 시도
         SignUpResult resultEnum = signUpLogic.trySignUp(member);
 
@@ -194,7 +196,7 @@ public class WebController {
     @PostMapping("/upload-img")
     public String singleFileUpload(@RequestParam("file") MultipartFile multipartFile, RedirectAttributes redirectAttributes, HttpSession session) throws GeneralSecurityException, IOException {
         String memberEmail = String.valueOf(session.getAttribute("memberEmail"));
-        FileUploadLogic fileLogic = new FileUploadLogic(memberDAO);
+        FileUploadLogic fileLogic = new FileUploadLogic(memberDAO, memberImgDAO);
         if(memberEmail.equals("null") || memberEmail.isBlank()){
             return "redirect:/openPage/pageHome";
         }
@@ -203,8 +205,6 @@ public class WebController {
             redirectAttributes.addFlashAttribute("message", "파일을 선택해 주세요.");
             return "redirect:/memberPage/pageImgUpload"; // 파일이 비어있으면 업로드 상태 페이지로 리다이렉트
         }
-
-
 
         if(fileLogic.tryUpload(multipartFile, memberEmail)) {      // 파일 업로드 성공
             redirectAttributes.addFlashAttribute("message", "성공적으로 업로드 되었습니다 '" + multipartFile.getOriginalFilename() + "'");
@@ -216,6 +216,33 @@ public class WebController {
         return "redirect:/memberPage/pageImgUpload"; // 업로드 후 상태 페이지로 리다이렉트
     }
 
+    @GetMapping("/memberPage/mapTest")
+    public String getMapTest(HttpSession session, Model model){
+        String memberEmail = String.valueOf(session.getAttribute("memberEmail"));
+        if(memberEmail.equals("null") || memberEmail.isBlank()){
+            return "redirect:/openPage/pageHome";
+        }
+        Optional<MemberDTO> memberDTO = memberDAO.findUserByEmail(memberEmail);
+        if(memberDTO.isPresent()){
+            MemberDTO member = memberDTO.get();
+            model.addAttribute("nickname", member.getNickname());
+        }
+        ArrayList<Double[]> locations = new ArrayList<>();
+        ArrayList<MemberImgDTO> memberImageInfos = memberImgDAO.findByEmail(memberEmail);
+        for(MemberImgDTO memberImageInfo : memberImageInfos){
+            Double[] location = new Double[2];
+            location[0] = Double.valueOf(memberImageInfo.getLatitude());
+            location[1] = Double.valueOf(memberImageInfo.getLongitude());
+            System.out.println("위도,경도 : "+location[0] + ",  " + location[1]);
+            locations.add(location);
+        }
+        // Gson 객체를 사용하여 locations 데이터를 JSON 문자열로 변환
+        Gson gson = new Gson();
+        String jsonLocations = gson.toJson(locations);
 
+        // 변환된 JSON 문자열을 모델에 추가
+        model.addAttribute("jsonLocations", jsonLocations);
+        return "memberPage/mapTest";
+    }
 
 }
