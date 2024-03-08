@@ -1,3 +1,10 @@
+지도위의 발자취 웹앱 프로젝트
+기본 : [Spring Boot, JPA(Java Persistence API), Thymeleaf] 
+[Google OAuth 2.0] : Google 인증을 위해 사용
+[Google Drive API v3] : 노트북 용량 없어서 임시사용
+[gson] : JSON 객체 <-> java 객체
+[metadata-extractor] : img metadata추출
+
 02/~  : html, css, js 템플릿 수정+적용 완료.
 
 02/~  : thymeleaf 적용 완료.
