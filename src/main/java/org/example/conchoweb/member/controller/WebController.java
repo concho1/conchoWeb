@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.example.conchoweb.member.model.MemberDTO;
-
-import java.io.File;
+import com.google.api.services.drive.model.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -74,6 +73,7 @@ public class WebController {
     public String getPageLogin(Model model){
         // MemberDTO 객체를 생성하고 모델에 추가
         model.addAttribute("memberDTO", new MemberDTO());
+        model.addAttribute("loginResult",null);
         return "openPage/pageLogIn";
     }
     @GetMapping("/openPage/pageSignUp")
@@ -112,22 +112,25 @@ public class WebController {
     }
     // 로그인
     @PostMapping("/api/signIn")
-    public String signIn(@ModelAttribute MemberDTO member, HttpSession session){
+    public String signIn(@ModelAttribute MemberDTO member, HttpSession session, Model model){
 
         SignInLogic signUpLogic = new SignInLogic(memberDAO);
         // 로그인 시도 시도
         SignInResult resultEnum = signUpLogic.trySignIn(member.getEmail(), member.getPw());
 
+        model.addAttribute("loginResult", String.valueOf(resultEnum));
         // 나중에 로그인 오류별 로직 추가하기
         switch(resultEnum){
             case SIGN_IN_SUCCESSFUL -> {
                 //Undertow(spring boot 내장 서버) 의 경우 보통 timeout 이 30분
                 //세션에 이메일 정보를 저장
                 session.setAttribute("memberEmail", member.getEmail());
+
                 return "redirect:/memberPage/pageMemberHome";   //redirect 로 중복 로그인 폼 제출 방지
+                //return "redirect:/openPage/pageLogIn";   //redirect 로 중복 로그인 폼 제출 방지
             }
             default -> {
-                return "openPage/pageSignUp";
+                return "openPage/pageLogIn";
             }
         }
     }
@@ -158,11 +161,19 @@ public class WebController {
             model.addAttribute("email", memberEmail);
 
             FileDownloadLogic fileDownloadLogic = new FileDownloadLogic(memberDAO);
-            List<String> urlList = fileDownloadLogic.getDriveFileLinks(memberEmail);
+            List<File> files = fileDownloadLogic.getDriveFiles(memberEmail);
+
+
+            /*
+            List<String> urlList = fileDownloadLogic.getDriveFileLinks(memberEmail); // 이전 링크 구문
+
             for(int i=1; i<=urlList.size(); i++){
                 System.out.println(urlList.get(i-1));
                 model.addAttribute("url"+ i, urlList.get(i-1));
             }
+            */
+
+
 
             return "memberPage/pageMemberHome";
         }

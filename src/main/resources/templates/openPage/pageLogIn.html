@@ -7,12 +7,12 @@
   <meta http-equiv="imagetoolbar" content="no">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="format-detection" content="telephone=no">
-  <meta name="title" content="웹사이트">
-  <meta name="description" content="웹사이트입니다.">
+  <meta name="title" content="지도위의 스토리">
+  <meta name="description" content="지도위에 스토리를 남겨보세요!">
   <meta name="keywords" content="키워드,키워드,키워드">
-  <meta property="og:title" content="웹사이트">
-  <meta property="og:description" content="웹사이트입니다">
-  <meta property="og:image" content="https://웹사이트/images/opengraph.png">
+  <meta property="og:title" content="지도위의 스토리">
+  <meta property="og:description" content="지도위에 스토리를 남겨보세요!">
+  <meta property="og:image" content="https://drive.google.com/thumbnail?id=1bHpAQGFz9WTw6LW5U8TCVgew1M9hqYsK&sz=w1080">
   <meta property="og:url" content="https://웹사이트">
   <title>pageLogIn</title>
   <link rel="stylesheet" th:href="@{/css/setting.css}">
@@ -102,7 +102,9 @@
                 <h6 class="inputset-tit">비밀번호<span>*</span>
                 </h6>
                 <input type="password" th:field="*{pw}" class="inputset-input form-control" placeholder="비밀번호를 입력해주세요.(5자이상 20자 미만)" aria-label="내용" required="">
+
               </label>
+              <div th:if="${not #strings.isEmpty(loginResult)}"><a th:text="${loginResult}"></a> </div>
             </div>
             <div class="inputset inputset-line inputset-lg inputset-label">
               <label>
@@ -112,6 +114,7 @@
               <label>
               </label>
             </div>
+
             <div class="contents-agree">
               <div class="checkset">
                 <input id="basic-N37-3" class="checkset-input input-fill" type="checkbox" value="" checked="">
