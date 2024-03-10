@@ -1,4 +1,4 @@
-지도위의 발자취 웹앱 프로젝트
+no지도위의 발자취 웹앱 프로젝트
 기본 : [Spring Boot, JPA(Java Persistence API), Thymeleaf] 
 [Google OAuth 2.0] : Google 인증을 위해 사용
 [Google Drive API v3] : 노트북 용량 없어서 임시사용
@@ -28,6 +28,10 @@
 03/04 : 구글 드라이브 api img url => html 이슈 해결, 외부 테스트중 https -> http 포워딩시 파일 업로드 불가 오류 해결
 
 03/05 : 3. sgis api 사용법 알아보기  https://sgis.kostat.go.kr/developer/html/newOpenApi/api/intro.html#2
+
+03/10 : 
+구글 드라이브 이미지 url 호스팅 지원 종료(2024.01부터 점차적으로 막는듯 함)
+외부 저장소로 변경
 
 todo list
 
