@@ -37,9 +37,13 @@
 구글 드라이브에서 이미지 url 호스팅을 점점 막고있기 때문에 노트북의 C:\static\member_imgs 저장소로 변경
 배포할때 쯤 aws s3 서비스 이용예정.
 
-
 03/14 - 03/21 :
 프로젝트 리팩토링 작업 (코드 효율화와 리뷰)
+
+03/24 :
+sgis map api 를 이용해 커스텀 마커(이미지)와 info윈도우 생성 추가
+마우스를 작게 나타나는 사진에 올리거나 클릭하면 사진이 확대되어 나타남 
+![image](https://github.com/concho1/conchoWeb/assets/142205346/1804e90f-25cd-4fd0-90f4-66997312b1dd)
 
 
 todo list
